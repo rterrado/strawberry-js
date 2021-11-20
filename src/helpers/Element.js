@@ -1,0 +1,33 @@
+class Element {
+    constructor(element,treeCount=null){
+        this.$element = element;
+        if (treeCount==null) {
+            treeCount = 1;
+        }
+        if (treeCount<4&&element.parentElement!==null) {
+            this.$parent = new Element(element.parentElement,treeCount++);
+        }
+    }
+    addClass(className){
+        this.$element.classList.add(className);
+    }
+    listClass(){
+        return this.$element.className.split(' ');
+    }
+    removeClass(className){
+        this.$element.classList.remove(className);
+    }
+    toggleClass(className){
+        let classes = this.listClass();
+        for (var i = 0; i < classes.length; i++) {
+            let clas = classes[i];
+            if (clas===className) {
+                this.removeClass(className);
+            }
+            else {
+                this.addClass(className);
+            }
+        }
+    }
+
+}
