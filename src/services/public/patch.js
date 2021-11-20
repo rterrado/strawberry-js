@@ -22,7 +22,7 @@ $patch:(patchName=null,templateSrc=null)=>{
             let template = templateSrc ?? this.$scope.$patchables[patchName];
 
             patchableElement.innerHTML = '';
-            window[e].$services.$append(this.$scope,patchableElement,template);
+            window[e].$scopes[this.$scope.$name].$services.$append(this.$scope,patchableElement,template);
 
         }
 

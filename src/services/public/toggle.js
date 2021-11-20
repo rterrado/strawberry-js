@@ -10,10 +10,10 @@ $toggle:(hidableName=null)=>{
 
     let e = this.$scope.$app;
 
-    let hideService = window[e].$services.$public()['$hide'];
+    let hideService = window[e].$scopes[this.$scope.$name].$services.$public()['$hide'];
     let $hide = hideService().init(this.$scope,hideService);
 
-    let showService = window[e].$services.$public()['$show'];
+    let showService = window[e].$scopes[this.$scope.$name].$services.$public()['$show'];
     let $show = showService().init(this.$scope,showService);
 
     let getElement=(hidableName,evaluator)=>{

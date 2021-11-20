@@ -10,10 +10,10 @@ $switch:(switchName=null)=>{
     let e = this.$scope.$app;
     return {
         when:(whenName)=>{
-            window[e].$services.$switchers().$on(this.$scope,switchName,whenName);
+            window[e].$scopes[this.$scope.$name].$services.$switchers().$on(this.$scope,switchName,whenName);
         },
         default:()=>{
-            window[e].$services.$switchers().$on(this.$scope,switchName,'$default');
+            window[e].$scopes[this.$scope.$name].$services.$switchers().$on(this.$scope,switchName,'$default');
         }
     }
 

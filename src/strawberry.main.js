@@ -37,7 +37,7 @@ strawberry.create = (e) => {
     window[e] = {
         $app:e,
         $scopes:{},
-        $services: new Services(e),
+        $services: {},
         // Saves an object to the strawberry object
         factory:(objName,func)=>{
             strawberry.$factory[objName] = func();
@@ -83,9 +83,7 @@ DomReady.ready(()=>{
         let scopeObj = app.$scopes[scopeName];
 
         // Calls the render method of the scope services
-        app.$services.$render(scopeObj,scopeElement);
-
-
+        app.$scopes[scopeName].$services.$render(scopeObj,scopeElement);
 
     }
 

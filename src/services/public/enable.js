@@ -21,7 +21,7 @@ $enable:(enableName=null,isEnable=null)=>{
         }
     }
     else {
-        let disableService = window[e].$services.$public()['$disable'];
+        let disableService = window[e].$scopes[this.$scope.$name].$services.$public()['$disable'];
         let $disable = disableService().init(this.$scope,disableService);
         $disable(enableName);
     }

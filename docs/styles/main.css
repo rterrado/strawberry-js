@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+div {
+    display: flex;
+}
+
+body {
+    font-family: 'Roboto';
+}
+
+/** Component: Header **/
+.Component#header.wrapper {
+
+}
+/** Light Theme **/
+body#Light div.separator {
+    border-width: 1px;
+    border-color: #dbdbdb;
+}
+
+body#Light code {
+    color: #0019a7;
+}
+
+body#Light div.vertical.separator.right {
+    border-right-style:solid;
+}
+
+
+/** Dark Theme **/
+body#Dark {
+    background-color: #282828;
+    color: white;
+}
+
+body#Dark select {
+    background-color: #282828;
+    color: white;
+}
+
+body#Dark .separator {
+    border-width: 1px;
+    border-color: #383838;
+}
+
+body#Dark code {
+    color: #02b7a6;
+}
+
+body#Dark div.vertical.separator.right {
+    border-right-style:solid;
+}
+
+/** Docs Global **/
+main.Docs {
+    width: 100%;
+    max-width: 1080px;
+    margin:auto;
+    padding-top: 100px;
+}
+
+main.Docs .Component#articles.wrapper {
+    width: 100%;
+    max-width: 280px;
+}
+
+main.Docs .Component#articles #list {
+    width: 100%;
+    text-align: right;
+    padding: 0px 20px;
+}
+
+main.Docs .Component#articles #list>li {
+    margin-top: 5px;
+    margin-bottom: 8px;
+}
+
+main.Docs article {
+    padding: 0px 30px;
+    font-size: 15px;
+    line-height: 24px;
+}
+
+main.Docs article >h1, h2, h3, p, select, code.block {
+    margin: 10px 0px;
+    display: block;
+}
+
+main.Docs article > h3 {
+    margin-top: 20px;
+}

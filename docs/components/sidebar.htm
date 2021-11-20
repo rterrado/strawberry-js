@@ -1,0 +1,8 @@
+<div xpatch="articleList" class="col">
+    <ul id="list" style="list-style-type: none;" xrepeat="articles as article">
+        <li>
+            <h6 xif="article.type=='heading'" class="heading">{{article.title}}</h6>
+            <span xif="article.type is null">{{article.title}}</span>
+        </li>
+    </ul>
+</div>

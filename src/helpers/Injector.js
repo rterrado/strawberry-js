@@ -31,7 +31,7 @@ class Injector {
             }
             if (arg.charAt(0)==='$') {
 
-                let service = window[strawberry.$app].$services.$public()[arg];
+                let service = window[strawberry.$app].$scopes[this.scopeObj.$name].$services.$public()[arg];
 
                 if (typeof service==='function') {
                     argObj.push(service().init(this.scopeObj,service));

@@ -27,7 +27,7 @@ $paginate:(paginateName=null)=>{
 
                     let template = this.$scope.$pagination[paginateName].$template;
 
-                    window[e].$services.$append(this.$scope,paginationElement,template);
+                    window[e].$scopes[this.$scope.$name].$services.$append(this.$scope,paginationElement,template);
 
                 }
 

@@ -9,5 +9,6 @@ class Scope {
         this.$renderables = {};
         this.$pagination = {};
         this.$templates = {};
+        this.$services = new Services(scopeName);
     }
 }

@@ -13,7 +13,6 @@ $ifs(scopeObj,scopeElement){
             let argument = strawberry.$$core.$getXValue(conditionalElement,'xif');
 
             let resolved = strawberry.$$core.$resolver.expression(scopeObj,argument.trim());
-            console.log(resolved);
 
             if (typeof resolved == "boolean") {
                 if (!resolved) conditionalElement.innerHTML= '';

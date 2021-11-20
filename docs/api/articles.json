@@ -1,0 +1,21 @@
+[
+    {
+		"title": "Getting Started",
+		"type": "heading"
+	},
+	{
+		"handle": "introduction",
+		"title": "Introduction",
+		"type": null
+	},
+    {
+		"handle": "scopes",
+		"title": "Scope",
+		"type": null
+	},
+    {
+		"handle": "factories",
+		"title": "Factories",
+		"type": null
+	}
+]

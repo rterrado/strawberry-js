@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>StrawberryJS - Introduction</title>
+        <script type="text/javascript" src="/strawberry.js"></script>
+        <script type="text/javascript" src="/scripts/docs.main.js"></script>
+        <link rel="stylesheet" href="/styles/main.css">
+    </head>
+    <body>
+        <section xscope="externals">
+            <div xcomponent="components.loader" id="loader" class="Component wrapper"></div>
+            <header xcomponent="components.header" id="header" class="Component wrapper"></header>
+        </section>
+        <main class="Docs">
+            <div class="inner">
+                <aside xscope="articles" id="articles" class="Component wrapper">
+                    <section xcomponent="components.sidebar"></section>
+                </aside>
+                <div class="vertical separator right"></div>
+                <article xscope="main">
+                    <h1>Getting Started</h1>
+                    StrawberryJS is a frontend Javascript framework that turns your code into
+                    <h3>Installation</h3>
+                    Just link to it! You don't have to key in a bunch of commands to install StrawberryJS, because being a <strong>front-end-only</strong> Javascript library, you can load it directly straight from a CDN.
+                    Currently, the source code can be downloaded from JSDelivr. Use the selector below to generate the link for the specific version you want to use:
+                    <select xchange="selectVersion()" xmodel="version">
+                        <option value="v1.0.0">Version 1.0.0</option>
+                        <option value="v1.1.0">Version 1.1.0</option>
+                    </select>
+                    <code xpatch="cdnLink" class="block">{{version}}</code>
+                    <h3>Creating an instance</h3>
+                    To start up a new project, you will want to use the <code>create</code> method with the name of the application as the argument, like so:
+                    <code class="block">strawberry.create('app');</code>
+                    In our example above, we have named our project as <code>app</code>. We can leave the callback function empty as of now.
+                </article>
+            </div>
+        </main>
+        <script type="text/javascript">
+            docs.scope('main',($scope,$patch)=>{
+                $scope.version = 'v1.0.0';
+                $scope.selectVersion=()=>{
+                    $patch('cdnLink');
+                }
+            });
+        </script>
+    </body>
+</html>
