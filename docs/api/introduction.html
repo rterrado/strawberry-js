@@ -32,7 +32,10 @@
                     <h3>Creating an instance</h3>
                     To start up a new project, you will want to use the <code>create</code> method with the name of the application as the argument, like so:
                     <code class="block">strawberry.create('app');</code>
-                    In our example above, we have named our project as <code>app</code>. We can leave the callback function empty as of now.
+                    In our example above, we have named our project as <code>app</code>. We can then use the name <code>app</code> to create a scope and a factory, like so:
+                    <code class="block">app.factory('user',()=>{});</code>
+                    <code class="block">app.scope('main',()=>{});</code>
+                    We can leave the callback function for now and discuss it later.
                 </article>
             </div>
         </main>

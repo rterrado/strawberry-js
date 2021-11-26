@@ -6,6 +6,10 @@ div {
     display: flex;
 }
 
+div.col {
+    flex-direction: column;
+}
+
 body {
     font-family: 'Roboto';
 }
@@ -90,4 +94,8 @@ main.Docs article >h1, h2, h3, p, select, code.block {
 
 main.Docs article > h3 {
     margin-top: 20px;
+}
+
+main.Docs code .tab {
+    margin-left: 35px;
 }

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>StrawberryJS - Scopes</title>
+        <script type="text/javascript" src="/strawberry.js"></script>
+        <script type="text/javascript" src="/scripts/docs.main.js"></script>
+        <link rel="stylesheet" href="/styles/main.css">
+    </head>
+    <body>
+        <section xscope="externals">
+            <div xcomponent="components.loader" id="loader" class="Component wrapper"></div>
+            <header xcomponent="components.header" id="header" class="Component wrapper"></header>
+        </section>
+        <main class="Docs">
+            <div class="inner">
+                <aside xscope="articles" id="articles" class="Component wrapper">
+                    <section xcomponent="components.sidebar"></section>
+                </aside>
+                <div class="vertical separator right"></div>
+                <article xscope="main">
+                    <h1>Factory</h1>
+                    Factory lets you create an object that can be used in different scopes in your application.
+                    <h3>Using Factory</h3>
+                    To create an object using factory, we need to pass the name of the object and the return the object 
+                    itself in the
+                </article>
+            </div>
+        </main>
+        <script type="text/javascript">
+            docs.scope('main',($scope,$patch)=>{
+                $scope.version = 'v1.0.0';
+                $scope.selectVersion=()=>{
+                    $patch('cdnLink');
+                }
+            });
+        </script>
+    </body>
+</html>

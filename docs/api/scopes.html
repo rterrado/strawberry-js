@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>StrawberryJS - Scopes</title>
+        <script type="text/javascript" src="/strawberry.js"></script>
+        <script type="text/javascript" src="/scripts/docs.main.js"></script>
+        <link rel="stylesheet" href="/styles/main.css">
+    </head>
+    <body>
+        <section xscope="externals">
+            <div xcomponent="components.loader" id="loader" class="Component wrapper"></div>
+            <header xcomponent="components.header" id="header" class="Component wrapper"></header>
+        </section>
+        <main class="Docs">
+            <div class="inner">
+                <aside xscope="articles" id="articles" class="Component wrapper">
+                    <section xcomponent="components.sidebar"></section>
+                </aside>
+                <div class="vertical separator right"></div>
+                <article xscope="main">
+                    <h1>Scopes</h1>
+                    Scope allows you to bind an object to elements and components in your application.
+                    It defines the context at which it's properties are bind into and the execution context of its method.
+                    <h3>Scope Object</h3>
+                    To create the scope object, we can use the scope method of the Strawberry instance we created.
+                    <code class="block">
+                        strawberry.create('app');<br>
+                        app.scope('profile',()=>{});
+                    </code>
+                    To reference this scope object to an element in the application, we can use the <code>xscope</code> attribute, like so:
+                    <code class="block">
+                        &lt;div class=&quot;profile-card&quot; xscope=&quot;profile&quot;&gt;
+                        &lt;/div&gt;
+                    </code>
+                    <h3>Scope Properties and Methods</h3>
+                    To assign properties and methods to the scope object, we need to inject the scope object itself
+                    to the callback function of the scope method above, like so:
+                    <code class="block">
+                        strawberry.create('app');<br>
+                        app.scope('profile',($scope)=>{
+                        <div class="tab">$scope.firstName = 'Kenjie'</div>
+                        });
+                    </code>
+                    NOTE: The scope object has always to be referenced as <code>$scope</code> !
+                    <h3>Placeholders</h3>
+                    You can use the declared properties and methods in its corresponding element using a placehoder, like so:
+                    <code class="block">
+                        &lt;div xscope=&quot;profile&quot; class=&quot;profile-card&quot; &gt;
+                        <div class="tab">{{firstName}<!---->}</div>
+                        &lt;/div&gt;
+                    </code>
+                    Method/functions are rendered in the same manner:
+                    <code class="block">
+                        &lt;script type=&quot;text/javascript&quot;&gt;
+                            <div class="tab col">
+                                strawberry.create('app');<br>
+                                app.scope('profile',($scope)=>{
+                                    <div class="tab col">
+                                        $scope.displayFirstName=()=>{
+                                            <div class="tab col">
+                                                return 'Kenjie';
+                                            </div>
+                                        }
+                                    </div>
+                                });
+                            </div>
+                        &lt;/script&gt; <br>
+                        &lt;div xscope=&quot;profile&quot; class=&quot;profile-card&quot; &gt;
+                        <div class="tab">{{displayFirstName()}<!---->}</div>
+                        &lt;/div&gt;
+                    </code>
+                    And so are objects!
+                    <code class="block">
+                        &lt;script type=&quot;text/javascript&quot;&gt;
+                            <div class="tab col">
+                                strawberry.create('app');<br>
+                                app.scope('profile',($scope)=>{
+                                    <div class="tab col">
+                                        $scope.user={firstName: 'Kenjie'}
+                                    </div>
+                                });
+                            </div>
+                        &lt;/script&gt; <br>
+                        &lt;div xscope=&quot;profile&quot; class=&quot;profile-card&quot; &gt;
+                        <div class="tab">{{user.firstName}<!---->}</div>
+                        &lt;/div&gt;
+                    </code>
+                </article>
+            </div>
+        </main>
+        <script type="text/javascript">
+            docs.scope('main',($scope,$patch)=>{
+                $scope.version = 'v1.0.0';
+                $scope.selectVersion=()=>{
+                    $patch('cdnLink');
+                }
+            });
+        </script>
+    </body>
+</html>
