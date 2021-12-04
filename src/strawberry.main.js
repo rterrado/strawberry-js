@@ -7,7 +7,12 @@ Created by Ken Terrado, 2021
 
 var strawberry = window.strawberry = {};
 
-strawberry.debug = true;
+// Debugging option, allows Strawberry.js to print errors during execution
+strawberry.debug = false;
+strawberry.debugger=()=>{
+    strawberry.debug = true;
+    return strawberry;
+}
 
 strawberry.$factory = {};
 
@@ -60,6 +65,7 @@ strawberry.create = (e) => {
             }
         }
     }
+    return strawberry;
 }
 
 // Boot Strawberry.js

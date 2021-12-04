@@ -45,11 +45,15 @@ $repeats(scopeObj,scopeElement){
 
             }
 
-            if (scopeObj[referenceObjName]!==undefined) {
+            // Resolves the repeatable object according to the left hand expression
+            // in the attribute xrepeat="LEFT as RIGHT"
+            let repeatableObject = strawberry.$$core.$resolver.expression(scopeObj,referenceObjName);
+
+            if (repeatableObject!==undefined) {
 
                 let i = 0;
 
-                for (const [key, value] of Object.entries(scopeObj[referenceObjName])) {
+                for (const [key, value] of Object.entries(repeatableObject)) {
                     let tempObj = {};
                     let aliasObjName = getAliasName(expression);
                     tempObj[aliasObjName] = value;
@@ -59,8 +63,6 @@ $repeats(scopeObj,scopeElement){
                     this.$append(tempObj,repeatElement,htmlTemplate,'events');
                     i++;
                 }
-
-
 
             }
             else {
