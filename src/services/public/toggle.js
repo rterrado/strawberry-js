@@ -16,28 +16,9 @@ $toggle:(hidableName=null)=>{
     let showService = window[e].$scopes[this.$scope.$name].$services.$public()['$show'];
     let $show = showService().init(this.$scope,showService);
 
-    let getElement=(hidableName,evaluator)=>{
-        return document.querySelector('[xscope="'+this.$scope.$name+'"]').querySelector('['+evaluator+'="'+hidableName+'"]');
-    }
-
-    let isHideOrShow=(hidableName)=>{
-        let elemRef = getElement(hidableName,'xhide');
-        if (elemRef===null) {
-            elemRef = getElement(hidableName,'xshow');
-            if (elemRef===null)return null;
-            return 'xshow';
-        }
-        return 'xhide';
-    }
-
-
-
-    let evaluation = isHideOrShow(hidableName);
-
     // Check if the name of the hidden element is registered
-    if (this.$scope.$togglers.hasOwnProperty(hidableName)) {
-
-        if (this.$scope.$togglers[hidableName]) {
+    if (this.$scope.$hidden.hasOwnProperty(hidableName)) {
+        if (this.$scope.$hidden[hidableName].state) {
             // Element is currently being SHOWN
             this.$scope.$togglers[hidableName] = false;
             $hide(hidableName);
@@ -48,17 +29,10 @@ $toggle:(hidableName=null)=>{
             this.$scope.$togglers[hidableName] = true;
             $show(hidableName);
         }
-
     }
     else {
-        // Register
-        if (evaluation==='xshow') {
-            this.$scope.$togglers[hidableName] = false;
-            $hide(hidableName);
-        }
-        else {
-            this.$scope.$togglers[hidableName] = true;
-            $show(hidableName);
+        if (strawberry.debug) {
+            console.warn('strawberry.js: Unable to toggle "'+hidableName+'", element do not exist');
         }
     }
 

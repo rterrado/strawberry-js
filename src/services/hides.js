@@ -12,7 +12,10 @@ $hides(scopeObj,scopeElement){
 
             let hidableName = strawberry.$$core.$getXValue(hidableElement,'xhide');
 
-            scopeObj.$hidden[hidableName] = hidableElement.innerHTML;
+            scopeObj.$hidden[hidableName] = {
+                template: hidableElement.innerHTML,
+                state: false
+            }
 
             hidableElement.innerHTML = '';
 

@@ -10,11 +10,12 @@ $render(scopeObj,renderElement,skip=null){
     this.$paginators(scopeObj,renderElement);
     this.$repeats(scopeObj,renderElement);
     this.$ifs(scopeObj,renderElement);
+    this.$hides(scopeObj,renderElement);
+    this.$shows(scopeObj,renderElement);
     this.$placeholders(scopeObj,renderElement);
     this.$checks(scopeObj,renderElement);
     this.$styles(scopeObj,renderElement);
     this.$models(scopeObj,renderElement);
-    this.$hides(scopeObj,renderElement);
     this.$disablers(scopeObj,renderElement);
 
     if (skip!=='events') {
