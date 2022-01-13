@@ -49,16 +49,23 @@ strawberry.create = (e) => {
         },
         scope:(scopeName,func)=>{
             try {
-                // Registers a new scope
-                window[e].$scopes[scopeName] = new Scope(e,scopeName);
-                if (!(func instanceof Function)) {
-                    throw 'strawberry.js: Invalid $scope creation: '+scopeName+', requires callback function.'
-                }
-                let injector = new Injector(func);
-                let args = injector.scope(window[e].$scopes[scopeName]).resolve();
 
-                // Calls the callback function required when creating a scope
-                func(...args);
+                let scopeElement = strawberry.$$core.$getScope(scopeName);
+
+                if (scopeElement.length>0) {
+
+                    // Registers a new scope
+                    window[e].$scopes[scopeName] = new Scope(e,scopeName);
+                    if (!(func instanceof Function)) {
+                        throw 'strawberry.js: Invalid $scope creation: '+scopeName+', requires callback function.'
+                    }
+                    let injector = new Injector(func);
+                    let args = injector.scope(window[e].$scopes[scopeName]).resolve();
+
+                    // Calls the callback function required when creating a scope
+                    func(...args);
+                    
+                }
 
             } catch (e) {
                 console.error(e);
