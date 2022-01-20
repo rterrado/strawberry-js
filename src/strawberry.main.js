@@ -37,7 +37,7 @@ strawberry.$$core = {
 }
 
 // Creates a new Strawberry instance
-strawberry.create = (e) => {
+strawberry.create = (e,fn) => {
     strawberry.$app = e;
     window[e] = {
         $app:e,
@@ -45,31 +45,35 @@ strawberry.create = (e) => {
         $services: {},
         // Saves an object to the strawberry object
         factory:(objName,func)=>{
-            strawberry.$factory[objName] = func();
+
+            let injector = new Injector(func);
+            let args = injector.scope(strawberry.$factory).resolve();
+
+            strawberry.$factory[objName] = func(...args);
+
         },
         scope:(scopeName,func)=>{
             try {
 
-                let scopeElement = strawberry.$$core.$getScope(scopeName);
-
-                if (scopeElement.length>0) {
-
-                    // Registers a new scope
-                    window[e].$scopes[scopeName] = new Scope(e,scopeName);
-                    if (!(func instanceof Function)) {
-                        throw 'strawberry.js: Invalid $scope creation: '+scopeName+', requires callback function.'
-                    }
-                    let injector = new Injector(func);
-                    let args = injector.scope(window[e].$scopes[scopeName]).resolve();
-
-                    // Calls the callback function required when creating a scope
-                    func(...args);
-                    
+                // Registers a new scope
+                window[e].$scopes[scopeName] = new Scope(e,scopeName);
+                if (!(func instanceof Function)) {
+                    throw 'strawberry.js: Invalid $scope creation: '+scopeName+', requires callback function.'
                 }
+                let injector = new Injector(func);
+                let args = injector.scope(window[e].$scopes[scopeName]).resolve();
+
+                // Calls the callback function required when creating a scope
+                func(...args);
 
             } catch (e) {
                 console.error(e);
             }
+        }
+    }
+    if (fn!==undefined) {
+        if (fn instanceof Function) {
+            fn(window[e]);
         }
     }
     return strawberry;
