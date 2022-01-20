@@ -16,6 +16,11 @@ class Injector {
         if (matchedFunc===null) {
             return [];
         }
+        
+        let invalidExpressions = /[(={})]/g;
+        if (invalidExpressions.test(matchedFunc[0])) {
+            return [];
+        }
 
         // Match all regex in the innerHTML string of the element
         let argumentExpression = matchedFunc[0];
