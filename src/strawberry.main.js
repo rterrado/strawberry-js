@@ -46,10 +46,15 @@ strawberry.create = (e,fn) => {
         // Saves an object to the strawberry object
         factory:(objName,func)=>{
 
-            let injector = new Injector(func);
-            let args = injector.scope(strawberry.$factory).resolve();
-
-            strawberry.$factory[objName] = func(...args);
+            if (func instanceof Function) {
+                let injector = new Injector(func);
+                let args = injector.scope(strawberry.$factory).resolve();
+                strawberry.$factory[objName] = func(...args);
+                return strawberry;
+            }
+                
+            strawberry.$factory[objName] = func();
+            return strawberry;
 
         },
         scope:(scopeName,func)=>{
