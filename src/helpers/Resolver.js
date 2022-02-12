@@ -221,15 +221,9 @@ class Resolver {
         }
         return objectExpression.split(".").reduce(function(o,x){
             if (o===undefined) {
-                if (strawberry.debug) {
-                    console.warn('strawberry.js: Unable to resolve $scope.'+objectExpression+' in scope: '+scopeObj.$name);
-                }
                 return;
             }
             if (o[x]===undefined) {
-                if (strawberry.debug) {
-                    console.warn('strawberry.js: Unable to resolve $scope.'+objectExpression+' in scope: '+scopeObj.$name);
-                }
                 return;
             }
             return o[x];

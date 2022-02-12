@@ -8,6 +8,12 @@ class Element {
             this.$parent = new Element(element.parentElement,treeCount++);
         }
     }
+    get(){
+        return this.$element;
+    }
+    referenceScope(scopeObject){
+        this.$element.scopeOf = scopeObject;
+    }
     addClass(className){
         this.$element.classList.add(className);
     }
@@ -29,5 +35,4 @@ class Element {
             }
         }
     }
-
 }
