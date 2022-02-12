@@ -16,7 +16,7 @@ class Injector {
         if (matchedFunc===null) {
             return [];
         }
-        
+
         let invalidExpressions = /[(={})]/g;
         if (invalidExpressions.test(matchedFunc[0])) {
             return [];
@@ -49,6 +49,18 @@ class Injector {
             }
             if (strawberry.$factory.hasOwnProperty(arg)) {
                 argObj.push(strawberry.$factory[arg]);
+                continue;
+            }
+            if (strawberry.$service.hasOwnProperty(arg)) {
+                let func = strawberry.$service[arg];
+                if (func instanceof Function) {
+                    let injector = new Injector(func);
+                    let args = injector.scope(this.scopeObj).resolve();
+                    let returnedObj = func(...args);
+                    argObj.push(returnedObj);
+                } else {
+                    argObj.push({});
+                }
                 continue;
             }
             console.error('strawberry.js: Injector cannot resolve "'+arg+'" as an object');

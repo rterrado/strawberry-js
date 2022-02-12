@@ -14,71 +14,55 @@
         -->
 
         <div xscope="test">
-            <div xcomponent="myComponent"></div>
             <button xclick="changeName()" class="button is-primary">Change Name</button>
-            <br>
-            <br>
-            <div xcomponent="modalCard" class="card">
-                <button xclick="hideCard()" class="button is-primary">Hide this card</button>
-            </div>
-            <br>
-            <div xcomponent="notification" class="card">
-                <div class="notification is-danger">
-                    <button xclick="hideNotification()" class="delete"></button>
-                    Primar lorem ipsum dolor sit amet, consectetur
-                    adipiscing elit lorem ipsum dolor. <strong>Pellentesque risus mi</strong>, tempus quis placerat ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam gravida purus diam, et dictum <a>felis venenatis</a> efficitur.
-                </div>
-            </div>
-            <br>
-            <div xcomponent="components.profile.card.url" class="card">
-            </div>
+            <div xcomponent="components.profile.card.src" class="card"></div>
         </div>
 
         <script type="text/javascript">
             strawberry.create('app');
             strawberry.debugger();
 
-            app.scope('test',function($scope,$component){
+            app.factory('user',()=>{
+                return {
+                    firstName: 'Kenjie'
+                }
+            });
 
-
+            app.service('component',($component,user)=>{
                 class Component {
-                    constructor(src,struct){
-                        console.log(this.constructor.name);
-                        this.url = src;
-                        this.struct = struct;
+                    constructor(src,name) {
+                        this.src = src;
+                        this.name = name;
                     }
                     update(){
-                        $component(this.struct).update();
+                        $component(this.name).update();
                     }
                 }
+                return {
+                    get:(componentName)=>{
+                        return $component(componentName).get();
+                    },
+                    bind:(componentSrc,componentName)=>{
+                        return new Component(componentSrc,componentName+'.src');
+                    }
+                }
+            });
 
-
+            app.scope('test',function($scope,component){
                 $scope.components = {
                     profile: {
-                        card: new Component('/tests/external.htm','components.profile.card.url')
+                        card: component.bind('/tests/external.htm','components.profile.card')
                     }
                 }
 
-
-                $scope.myComponent = '/tests/external.htm';
                 $scope.firstName = 'Kenjie';
                 $scope.changeName=(button)=>{
                     button.addClass('is-loading');
                     setTimeout(()=>{
                         $scope.firstName = 'Ken';
-                        $component('myComponent').update();
-                        button.removeClass('is-loading');
-                        $($component('notification').get()).fadeIn();
                         $scope.components.profile.card.update();
+                        button.removeClass('is-loading');
                     },1000);
-                }
-                $scope.hideCard=()=>{
-                    let component = $($component('modalCard').get());
-                    component.fadeOut();
-                }
-                $scope.hideNotification=()=>{
-                    let component = $component('notification').get();
-                    $(component).fadeOut();
                 }
             });
         </script>
