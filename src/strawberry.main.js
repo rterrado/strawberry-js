@@ -15,6 +15,7 @@ strawberry.debugger=()=>{
 }
 
 strawberry.$factory = {};
+strawberry.$service = {};
 
 // Core methods of Strawberry.js
 strawberry.$$core = {
@@ -52,10 +53,17 @@ strawberry.create = (e,fn) => {
                 strawberry.$factory[objName] = func(...args);
                 return strawberry;
             }
-                
+
             strawberry.$factory[objName] = func();
             return strawberry;
 
+        },
+        service:(serviceName,func)=>{
+            if (!func instanceof Function) {
+                return;
+            }
+            strawberry.$service[serviceName] = func;
+            return strawberry;
         },
         scope:(scopeName,func)=>{
             try {

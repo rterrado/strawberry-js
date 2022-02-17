@@ -7,7 +7,6 @@ $render(scopeObj,renderElement,skip=null){
     this.$components(scopeObj,renderElement);
     this.$patches(scopeObj,renderElement);
     this.$switchers().find(scopeObj,renderElement);
-    this.$paginators(scopeObj,renderElement);
     this.$repeats(scopeObj,renderElement);
     this.$ifs(scopeObj,renderElement);
     this.$hides(scopeObj,renderElement);

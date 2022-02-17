@@ -39,8 +39,12 @@ $repeats(scopeObj,scopeElement){
 
                 let repeatables = getAliasName(expression);
 
-                for (var i = 0; i < scopeObj[repeatables]; i++) {
-                    scopeObj.$$index['props'+i] = new Object;
+                let repetitions = strawberry.$$core.$resolver.expression(scopeObj,repeatables);
+
+                if (!isNaN(parseFloat(repetitions)) && !isNaN(repetitions - 0)){
+                    for (var i = 0; i < repetitions; i++) {
+                        scopeObj.$$index['props'+i] = new Object;
+                    }
                 }
 
             }
@@ -59,7 +63,7 @@ $repeats(scopeObj,scopeElement){
                     tempObj[aliasObjName] = value;
                     tempObj.$parent = scopeObj;
                     tempObj.$index = i;
-                    tempObj.$parent.$child = tempObj;
+                    //tempObj.$parent.$child = tempObj;
                     this.$append(tempObj,repeatElement,htmlTemplate,'events');
                     i++;
                 }
