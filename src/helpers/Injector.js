@@ -63,7 +63,9 @@ class Injector {
                 }
                 continue;
             }
-            console.error('strawberry.js: Injector cannot resolve "'+arg+'" as an object');
+            if (strawberry.debug) {
+                console.error('strawberry.js: Injector cannot resolve "'+arg+'" as an object');
+            }
         }
         return argObj;
 
