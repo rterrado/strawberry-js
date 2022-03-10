@@ -15,6 +15,8 @@ $component:(componentName=null)=>{
         // Finds all component element
         let allComponentElements = strawberry.$$core.$getElementsFromScope(this.$scope.$name,'xcomponent="'+componentName+'"');
 
+        console.log(allComponentElements);
+
         for (var i = 0; i < allComponentElements.length; i++) {
 
             let template = this.$scope.$templates[componentName];

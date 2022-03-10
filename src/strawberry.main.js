@@ -65,19 +65,35 @@ strawberry.create = (e,fn) => {
             strawberry.$service[serviceName] = func;
             return strawberry;
         },
-        scope:(scopeName,func)=>{
+        scope:(scopeName,arg1,arg2)=>{
             try {
 
                 // Registers a new scope
                 window[e].$scopes[scopeName] = new Scope(e,scopeName);
-                if (!(func instanceof Function)) {
-                    throw 'strawberry.js: Invalid $scope creation: '+scopeName+', requires callback function.'
+
+                let callback = null;
+
+                /** Decides what argument should be executed as callback function
+                    By checking if the second argument was passed a preset **/
+                if (!(arg1 instanceof Function)) callback = arg1;
+                if (arg1 instanceof Array) callback = arg2;
+
+                // Checkpoint
+                if (null===callback) {
+                    throw 'strawberry.js: Invalid $scope creation: '+scopeName+', requires callback function or preset parameters.'
                 }
-                let injector = new Injector(func);
+
+                /** If the second argument is a scope preset, inject presets into
+                    into the scope object **/
+                if (callback===arg2) {
+                    window[e].$scopes[scopeName].invokePreset(arg1);
+                }
+
+                let injector = new Injector(callback);
                 let args = injector.scope(window[e].$scopes[scopeName]).resolve();
 
                 // Calls the callback function required when creating a scope
-                func(...args);
+                callback(...args);
 
             } catch (e) {
                 console.error(e);
